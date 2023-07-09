@@ -1,0 +1,32 @@
+{
+    "name": "components/api-doc-generator",
+    "type": "library",
+    "version": "1.0.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Components\\ApiDocGenerator\\": "src/"
+        }
+    },
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Components\\ApiDocGenerator\\Providers\\ApiDocGeneratorProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Denis Sychev",
+            "email": "sychev.d@market-soft.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9",
+        "phpdocumentor/reflection-docblock": "*",
+        "goldspecdigital/oooas": "^2.10"
+    }
+}
