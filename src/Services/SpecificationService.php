@@ -4,11 +4,13 @@
 namespace Components\ApiDocGenerator\Services;
 
 
+use Components\ApiDocGenerator\Factories\DefaultResponse;
 use Components\ApiDocGenerator\Information\Middleware;
 use Components\ApiDocGenerator\Information\Path;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Info;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Operation;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\PathItem;
+use GoldSpecDigital\ObjectOrientedOAS\Objects\Response;
 use GoldSpecDigital\ObjectOrientedOAS\Objects\Server;
 use GoldSpecDigital\ObjectOrientedOAS\OpenApi;
 use Illuminate\Routing\Router;
@@ -109,6 +111,9 @@ class SpecificationService
                     $responses = array_merge($responses, $middlewareInf->getResponses());
                     $requestBodyMergeService->add($middlewareInf->getRequestBody());
                 }
+                if (!$responses) {
+                    $responses[] = $this->getDefaultResponse();
+                }
 
                 $operation = Operation::create()->action(Str::lower($method))
                     ->parameters(...$requestParams)
@@ -141,7 +146,14 @@ class SpecificationService
         return $this->middlewares[$className];
     }
 
-    public function validate()
+    public function getDefaultResponse(): Response
     {
+        $defaultClass = config('api_doc_generator.default_response');
+        if (!$defaultClass) {
+            $response = new DefaultResponse();
+        } else {
+            $response = new $defaultClass();
+        }
+        return $response->build();
     }
 }

@@ -85,4 +85,6 @@ return [
             'base_url' => null, // по умолчанию вычисляется автоматически
         ],
     ],
+
+     'default_response' => \Components\ApiDocGenerator\Factories\DefaultResponse::class,
 ];

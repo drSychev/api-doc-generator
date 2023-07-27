@@ -48,7 +48,7 @@ class RequestBodyMergeService
                 $mediaType[] = $mediaType;
                 continue;
             }
-            $this->properties = array_merge($this->properties, $mediaType->schema->properties);
+            $this->properties = array_merge($this->properties, $mediaType->schema->properties ?? []);
             if ($mediaType->schema->required) {
                 $this->required = array_merge($mediaType->schema->required, $this->required);
             }
