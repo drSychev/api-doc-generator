@@ -25,7 +25,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^9",
+        "laravel/framework": "^9 || ^10",
         "phpdocumentor/reflection-docblock": "*",
         "goldspecdigital/oooas": "^2.10"
     }
